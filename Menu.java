@@ -3,7 +3,7 @@ import java.util.Vector;
 import java.util.Scanner;
 
 
-class ID3{
+class Menu{
     public static void main(String[] args){
         printMenu();
         Scanner stdin = new Scanner(System.in);
@@ -28,15 +28,6 @@ class ID3{
                     break;
                 }
                 default: return; //sair
-            }
-            Rules.parseData(file);
-            String[][] table = Rules.getTable();
-            System.out.println("----------");
-            for(String[] line : table){
-                for(int i=0;i<line.length;i++){
-                    System.out.print(line[i] + " ");
-                }
-                System.out.println();
             }
 
             printMenu();
