@@ -11,6 +11,7 @@ class Data {
     //para cada posição do vetor fará corresponder os atributos possíveis
     private static ArrayList<HashSet<String>> attributes;
     private static Data data = null;
+    private static String[] attributeNames;
 
     public static Data getData(String file){//Data é um Singleton, apenas uma instância de cada vez.
         if(data == null){
@@ -26,8 +27,12 @@ class Data {
         setFormattedData();
     }
 
-    public Object[][] getTable(){
+    public Object[][] getTable(){ //para ter a tabela formatada com os dados
         return formattedTable;
+    }
+
+    public String[] getAttributeNames(){ //para ter uma lista de nomes dos Atributos
+        return attributeNames;
     }
 
     private static void setData(String file){
@@ -36,7 +41,9 @@ class Data {
             br = new BufferedReader(new FileReader(file));
             if(br.ready()){//a primeira linha é lixo
                 attributes = new ArrayList<>();
-                int size = br.readLine().split(",").length - 1;//o primeiro slot é lixo
+                String[] firstLine = br.readLine().split(",");//isto é a primeira linha que é lixo
+                setAttributeNames(firstLine);
+                int size = firstLine.length - 1;
                 for(int i=0;i<size;i++){
                     attributes.add(new HashSet<String>());
                 }
@@ -68,6 +75,13 @@ class Data {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private static void setAttributeNames(String[] firstLine){
+        attributeNames = new String[firstLine.length-1];
+        for(int i=0;i<attributeNames.length;i++){
+            attributeNames[i] = firstLine[i+1];
         }
     }
 
