@@ -7,4 +7,8 @@ abstract class Node{
     public void setAttribute(String attribute) {
         this.attribute = attribute;
     }
+
+    public Node(String attribute) {
+        this.attribute = attribute;
+    }
 }
