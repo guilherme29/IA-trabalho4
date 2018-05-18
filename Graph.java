@@ -1,6 +1,6 @@
 
 class Graph{
-    public static Node root;
+    //public static Node root;
     /*
     public static void main(String[] args){
         Graph alfa = new Graph();
