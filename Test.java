@@ -19,5 +19,10 @@ class Test{
             }
             System.out.println();
         }
+        String[] nomes = info.getAttributeNames();
+        for(String word : nomes){
+            System.out.print(word + ", ");
+        }
+        System.out.println();
     }
 }
