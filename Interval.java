@@ -24,8 +24,12 @@ class Interval{
         this.value2 = value2;
     }
 
-    public double getValue1() {
+    public void setValue2(double value2, boolean isLast) {
+        this.value2 = value2;
+        this.isLast = isLast;
+    }
 
+    public double getValue1() {
         return value1;
     }
 
@@ -35,5 +39,10 @@ class Interval{
 
     public boolean isLast() {
         return isLast;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + value1 + "," + value2 + "]";
     }
 }
