@@ -10,9 +10,30 @@ class Interval{
         this.isLast = isLast;
     }
 
-    public isInside(double value){ //para ver se está dentro do intervalo
-        if(value >= value1 && value < value2) return true;
-        else if(value == value2 && isLast) return true;
-        else return false;
+    public Interval(double value1){ //construtor do primeiro intervalo
+        this.value1 = value1;
+        this.isLast = false;
+    }
+
+    public boolean isInside(double value){ //para ver se está dentro do intervalo
+        return value >= value1 && value < value2 ||
+                value == value2 && isLast;
+    }
+
+    public void setValue2(double value2) {
+        this.value2 = value2;
+    }
+
+    public double getValue1() {
+
+        return value1;
+    }
+
+    public double getValue2() {
+        return value2;
+    }
+
+    public boolean isLast() {
+        return isLast;
     }
 }
