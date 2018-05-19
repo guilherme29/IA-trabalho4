@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Vector;
 import java.io.*; //para ter ficheiros.
+import java.util.TreeSet;
 
 
 class Data {
@@ -91,7 +92,9 @@ class Data {
         }
     }
 
-    private static void clearData() { //limpa informação que já lá estava
+    private static void clearData() {
+        //limpa informação que já lá estava
+        // TODO
         if (table != null){
             if (!table.isEmpty()) {
                 table.clear();
@@ -145,12 +148,17 @@ class Data {
     //função auxiliar à setFormattedAttributes()
     //String -> Double(Object)
     private static HashSet<Object> stringSetToObjectSet(HashSet<String> set){
+        //TODO arranjar isto para intervalos
+//        TreeSet<Object> auxSet = new TreeSet();
+//        auxSet.addAll(set);
+//        HashSet<double[]> result = new HashSet<double[]>();
         HashSet<Object> newSet = new HashSet<Object>();
         for(String elem : set){
             Double newValue = Double.parseDouble(elem);//String -> Double
             newSet.add(newValue);
         }
         return newSet;
+        //return result;
     }
 
     //função auxiliar à setFormattedAttributes()

@@ -18,9 +18,14 @@ class Test{
 //                else System.out.println("-->String");
 //            }
 //        }
-        Table tabela = new Table(table);
-        tabela.calculateEntropy()
+        Vector<Integer> indexList = new Vector<Integer>();
+        indexList.add(1);
+        indexList.add(2);
+        indexList.add(3);
 
+        Table tabela = new Table(table);
+        double result = tabela.calculateEntropy(indexList,0,attributeList.elementAt(0));
+        System.out.println(result);
 //        for(int i=0;i<table.length;i++){
 //            for(int j=0;j<table[i].length;j++){
 //                System.out.print(table[i][j]);
