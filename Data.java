@@ -155,12 +155,12 @@ class Data {
         }
         Interval[] intervalList = new Interval[doubleList.length];
         intervalList[0] = new Interval(doubleList[0]);
-        for(int i=1;i<doubleList.length-1;i++){
+        for(int i=1;i<doubleList.length;i++){
             double v2 = (intervalList[i-1].getValue1() + doubleList[i] ) / 2;
             intervalList[i-1].setValue2(v2); //fecha o intervalo anterior
             intervalList[i] = new Interval(v2);//põe o primeiro valor do intervalo currente
         }
-        intervalList[doubleList.length-1].setValue2(doubleList[doubleList.length-1],true);//dá set ao valor2 do último intervalo
+        intervalList[intervalList.length-1].setValue2(doubleList[doubleList.length-1],true);//dá set ao valor2 do último intervalo
         HashSet<Object> newSet = new HashSet<Object>();//hashset de Intervals
         //newSet.addAll(intervalList);
         for(Interval interval : intervalList){

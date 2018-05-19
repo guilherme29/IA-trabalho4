@@ -43,6 +43,7 @@ class Interval{
 
     @Override
     public String toString() {
-        return "[" + value1 + "," + value2 + "]";
+        if(isLast) return "[" + value1 + "," + value2 + "]";
+        else return "[" + value1 + "," + value2 + "[";
     }
 }
