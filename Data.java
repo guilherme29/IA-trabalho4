@@ -10,6 +10,7 @@ class Data {
     private static Object[][] formattedTable;
     //para cada posição do vetor fará corresponder os atributos possíveis
     private static ArrayList<HashSet<String>> attributes;
+    private static Vector<HashSet<Object>> formattedAttributes;
     private static Data data = null;
     private static String[] attributeNames;
 
@@ -25,6 +26,7 @@ class Data {
         clearData();
         setData(file);
         setFormattedData();
+        setFormattedAttributes(formattedTable);
     }
 
     public Object[][] getTable(){ //para ter a tabela formatada com os dados
@@ -33,6 +35,10 @@ class Data {
 
     public String[] getAttributeNames(){ //para ter uma lista de nomes dos Atributos
         return attributeNames;
+    }
+
+    public Vector<HashSet<Object>> getFormattedAttributes(){
+        return formattedAttributes;
     }
 
     private static void setData(String file){
@@ -127,4 +133,49 @@ class Data {
         }
     }
 
+//    private static void setFormattedAttributes(){
+//        //vai ser preciso para calcular a entropia da tabela
+//        //a implementação desta função não é ótima mas a ótima é uma dor de cabeça de implementar.
+//        //a ótima seria ir ver a lista dos diferentes valores que cada atributo tem
+//        formattedAttributes = new Vector<HashSet<Object>>();
+//        Object[] line = formattedTable[0];
+//
+//    }
+
+    //função auxiliar à setFormattedAttributes()
+    //String -> Double(Object)
+    private static HashSet<Object> stringSetToObjectSet(HashSet<String> set){
+        HashSet<Object> newSet = new HashSet<Object>();
+        for(String elem : set){
+            Double newValue = Double.parseDouble(elem);//String -> Double
+            newSet.add(newValue);
+        }
+        return newSet;
+    }
+
+    //função auxiliar à setFormattedAttributes()
+    //String -> String(Object)
+    private static HashSet<Object> stringSetToObjectSet2(HashSet<String> set){
+        HashSet<Object> newSet = new HashSet<Object>();
+        for(String elem : set){
+            newSet.add(elem);
+        }
+        return newSet;
+    }
+
+    private static void setFormattedAttributes(Object[][] table){
+        Object[] typeLine = table[0]; //esta linha dá os tipos que cada hashTable deve ter
+        formattedAttributes = null;
+        formattedAttributes = new Vector<HashSet<Object>>();
+        int i = 0;
+        for(HashSet<String> hashSet : attributes){
+            if(typeLine[i] instanceof Double) {
+                formattedAttributes.add(stringSetToObjectSet(hashSet));
+            }
+            else{ //se for string
+                formattedAttributes.add(stringSetToObjectSet2(hashSet));
+            }
+            i++;
+        }
+    }
 }
