@@ -136,29 +136,37 @@ class Data {
         }
     }
 
-//    private static void setFormattedAttributes(){
-//        //vai ser preciso para calcular a entropia da tabela
-//        //a implementação desta função não é ótima mas a ótima é uma dor de cabeça de implementar.
-//        //a ótima seria ir ver a lista dos diferentes valores que cada atributo tem
-//        formattedAttributes = new Vector<HashSet<Object>>();
-//        Object[] line = formattedTable[0];
-//
-//    }
 
     //função auxiliar à setFormattedAttributes()
     //String -> Double(Object)
     private static HashSet<Object> stringSetToObjectSet(HashSet<String> set){
         //TODO arranjar isto para intervalos
-//        TreeSet<Object> auxSet = new TreeSet();
-//        auxSet.addAll(set);
-//        HashSet<double[]> result = new HashSet<double[]>();
-        HashSet<Object> newSet = new HashSet<Object>();
+        TreeSet<Double> auxSet = new TreeSet<Double>();//TreeSets mantem-se ordenados
         for(String elem : set){
             Double newValue = Double.parseDouble(elem);//String -> Double
-            newSet.add(newValue);
+            auxSet.add(newValue);
+        }
+        double[] doubleList = new double[auxSet.size()];
+        int k = 0;
+        for(Double elem : auxSet){ //passei tudo para um vetor apenas porque era mais fácil
+            //trabalhar neste formato, embora aumente a ordem de complexidade
+            doubleList[k] = elem;
+            k++;
+        }
+        Interval[] intervalList = new Interval[doubleList.length];
+        intervalList[0] = new Interval(doubleList[0]);
+        for(int i=1;i<doubleList.length-1;i++){
+            double v2 = (intervalList[i-1].getValue1() + doubleList[i] ) / 2;
+            intervalList[i-1].setValue2(v2); //fecha o intervalo anterior
+            intervalList[i] = new Interval(v2);//põe o primeiro valor do intervalo currente
+        }
+        intervalList[doubleList.length-1].setValue2(doubleList[doubleList.length-1],true);//dá set ao valor2 do último intervalo
+        HashSet<Object> newSet = new HashSet<Object>();//hashset de Intervals
+        //newSet.addAll(intervalList);
+        for(Interval interval : intervalList){
+            newSet.add(interval);
         }
         return newSet;
-        //return result;
     }
 
     //função auxiliar à setFormattedAttributes()
