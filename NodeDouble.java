@@ -1,10 +1,12 @@
 class NodeDouble extends Node{
-    private int value1;
-    private int value2;
+    private Interval interval;
 
-    public NodeDouble(int value1, int value2, String attribute) {
+    public NodeDouble(Interval interval, String attribute) {
         super(attribute);
-        this.value1 = value1;
-        this.value2 = (value1 + value2)/2;
+        this.interval = interval;
+    }
+
+    public Interval getInterval() {
+        return interval;
     }
 }
