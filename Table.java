@@ -36,11 +36,9 @@ class Table{
         }
         i = 0;
         for(Object value : valueList){
-            System.out.println("     " + value);
             for(int k=0;k<table.length;k++) {
                 Interval aux = (Interval) value;
-                System.out.println((double) table[k][col]);
-                if(aux.isInside((double) table[k][col])){ //tenho de dar cast
+                if(aux.isInside((double) table[k][col]) && indexList.contains(k)){ //tenho de dar cast e tem de ser um index da lista
                     quantity[i]++;
                 }
             }
@@ -72,7 +70,7 @@ class Table{
         i = 0;
         for(Object value : valueList){
             for(int k=0;k<table.length;k++){
-                if(table[k][col].equals(value)){
+                if(table[k][col].equals(value) && indexList.contains(k)){//tem de ser um index da lista
                     quantity[i]++;
                 }
             }
@@ -81,6 +79,9 @@ class Table{
         //Entropy(Decision) = – p(Yes)*log2p(Yes) – p(No)*log2p(No) -p(OutraCoisa)*log2p(OutraCoisa) ..
         double result = 0;
         for(i=0;i<quantity.length;i++){
+            if(quantity[i] == 0){//para evitar erros com logaritmo
+                continue;//equivalente a result += 0
+            }
             result += -1*quantity[i]*Math.log(quantity[i])/Math.log(2);
         }
         return result;
