@@ -14,6 +14,52 @@ class Table{
     //senão deve-se escolher o menor possível ( o mais afastado do 0)
     public static double calculateEntropy(Vector<Integer> indexList, int col,
                                        HashSet<Object> values){
+        for(Object elem : values){ //itero só para chegar ao primeiro elem e retornar logo.
+            if(elem instanceof String) {
+                return calculateEntropyCategoric(indexList,col,values);
+            }
+            else{//elem instanceof Interval
+                return calculateEntropyNumeric(indexList,col,values);
+            }
+        }
+        return 0; //se o set por alguma razão tiver vazio então = 0
+    }
+
+    public static double calculateEntropyNumeric(Vector<Integer> indexList, int col,
+                                          HashSet<Object> values) {
+        Object[] valueList = new Object[values.size()];//vetor com os intervalos
+        int[] quantity = new int[values.size()];//quantidade de elems dentro do intervalo
+        int i = 0;
+        for(Object value : values){
+            valueList[i] = value;
+            i++;
+        }
+        i = 0;
+        for(Object value : valueList){
+            System.out.println("     " + value);
+            for(int k=0;k<table.length;k++) {
+                Interval aux = (Interval) value;
+                System.out.println((double) table[k][col]);
+                if(aux.isInside((double) table[k][col])){ //tenho de dar cast
+                    quantity[i]++;
+                }
+            }
+            i++;
+        }
+        double result = 0;
+        for(i=0;i<quantity.length;i++){
+            if(quantity[i] == 0){//para evitar erros com logaritmo
+                continue;//equivalente a result += 0
+            }
+            result += -1*quantity[i]*Math.log(quantity[i])/Math.log(2);
+        }
+        return result;
+    }
+
+
+        //função auxiliar para calcular entropia para valores categóricos
+    private static double calculateEntropyCategoric(Vector<Integer> indexList, int col,
+                                          HashSet<Object> values) {
         Object[] valueList = new Object[values.size()];//o HashSet num vetor.
         int[] quantity = new int[values.size()];//quantidade de cada elem do hashset
         int i = 0;
@@ -39,6 +85,7 @@ class Table{
         }
         return result;
     }
+
 
     public void print(){
         for(int i=0;i<table.length;i++){
