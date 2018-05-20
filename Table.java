@@ -25,7 +25,7 @@ class Table{
         return 0; //se o set por alguma razão tiver vazio então = 0
     }
 
-    public static double calculateEntropyNumeric(Vector<Integer> indexList, int col,
+    private static double calculateEntropyNumeric(Vector<Integer> indexList, int col,
                                           HashSet<Object> values) {
         Object[] valueList = new Object[values.size()];//vetor com os intervalos
         int[] quantity = new int[values.size()];//quantidade de elems dentro do intervalo
