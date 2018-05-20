@@ -24,8 +24,22 @@ class Test{
         indexList.add(3);
 
         Table tabela = new Table(table);
-        double result = tabela.calculateEntropy(indexList,0,attributeList.elementAt(0));
+        tabela.print();
+
+
+        double result = Table.calculateEntropy(indexList,2,attributeList.elementAt(2));
         System.out.println(result);
+
+
+
+//        for(HashSet hashset : info.getFormattedAttributes()){
+//            for(Object elem : hashset){
+//                System.out.print(elem);
+//                if(elem instanceof Interval) System.out.print("<<<<<");
+//                System.out.println();
+//            }
+//        }
+
 //        for(int i=0;i<table.length;i++){
 //            for(int j=0;j<table[i].length;j++){
 //                System.out.print(table[i][j]);
