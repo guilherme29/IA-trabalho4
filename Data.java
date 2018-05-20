@@ -138,9 +138,8 @@ class Data {
 
 
     //função auxiliar à setFormattedAttributes()
-    //String -> Double(Object)
+    //String -> Interval(Object)
     private static HashSet<Object> stringSetToObjectSet(HashSet<String> set){
-        //TODO arranjar isto para intervalos
         TreeSet<Double> auxSet = new TreeSet<Double>();//TreeSets mantem-se ordenados
         for(String elem : set){
             Double newValue = Double.parseDouble(elem);//String -> Double
